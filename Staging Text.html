@@ -1,0 +1,344 @@
+<h1>
+    Daily Code:-
+</h1> 
+<pre id="configdaily" style="display:none;">
+    'use strict';
+ 
+ 
+ 
+    const HttpsProxyAgent = require('https-proxy-agent');
+     
+     
+     
+    const proxyConfig = [
+    //   {
+    //     context: '/api/ct3d-service',
+    //     target: 'http://localhost:8989',
+    //     // context: '/ct3d-api',
+    //     // target: 'https://ct3d-dev.corp.hpicloud.net',
+    //     //If you need to access a backend that is not on localhost, you will need to add the changeOrigin as follows
+    //     changeOrigin: true,
+    //     secure: true,
+    //     logLevel: "debug"
+    //   },
+      {
+        context: '/api/aaa',
+        target:'https://daily.gsbprint.net', //'https://stg.printopt.org'
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      },
+      // {
+      //   context: '/learn/v1',
+      //   target: 'https://hp-gsbstaging.docebosaas.com',//'https://daily.gsbprint.net',
+      //   changeOrigin: true,
+      //   //secure: true,
+      //   logLevel: "debug"
+      // },
+      // {
+      //   context: '/api//DeviceFamilyModelSkills',
+      //   target: 'http://localhost:54947',//'https://daily.gsbprint.net',
+      //   changeOrigin: true,
+      //   //secure: true,
+      //   logLevel: "debug"
+      // },
+      {
+        context: '/api/learn',
+        target: 'http://localhost:54947/',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        timeout: 720000
+      },
+      {
+        context: '/api/portal',
+        target: 'https://daily.gsbprint.net',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      },
+      {
+        context: '/oauth2/token',
+        target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      },
+      {
+        context: '/manage/v1/user',
+        target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      },
+      {
+        context: '/learn/v1/enrollments',
+        target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug",
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      },
+      {
+        context: '/learn/v1/lp/',
+        target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+        changeOrigin: true,
+        //secure: true,
+        logLevel: "debug"  ,
+        agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+       },{
+         context: '/audiences/v1/audience/',
+        target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+         changeOrigin: true,
+      //   //secure: true,
+         logLevel: "debug",
+         agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+      }
+    ];
+     
+     
+     
+    function setupForCorporateProxy(proxyConfig) {
+      if (!Array.isArray(proxyConfig)) {
+        proxyConfig = [proxyConfig];
+      }
+     
+     
+     
+      const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+      let agent = null;
+     
+     
+     
+      if (proxyServer) {
+        agent = new HttpsProxyAgent(proxyServer);
+        proxyConfig.forEach(entry => { entry.agent = agent; });
+      }
+     
+     
+     
+      return proxyConfig;
+    }
+     
+     
+     
+    module.exports = setupForCorporateProxy(proxyConfig);
+</pre>
+<br>
+<button style="background-color:rgb(0, 255, 153) ; " onclick="copyconfigdaily()">Copy Config.js Text</button>
+
+<br><br>
+<h1>
+    Staging Code :-
+</h1> 
+
+<pre id="config" style="display:none;">
+'use strict';
+ 
+ 
+ 
+ const HttpsProxyAgent = require('https-proxy-agent');
+  
+  
+  
+ const proxyConfig = [
+ //   {
+ //     context: '/api/ct3d-service',
+ //     target: 'http://localhost:8989',
+ //     // context: '/ct3d-api',
+ //     // target: 'https://ct3d-dev.corp.hpicloud.net',
+ //     //If you need to access a backend that is not on localhost, you will need to add the changeOrigin as follows
+ //     changeOrigin: true,
+ //     secure: true,
+ //     logLevel: "debug"
+ //   },
+   {
+     context: '/api/aaa',
+     target: 'https://stg.printopt.org', //'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   },
+   // {
+   //   context: '/learn/v1',
+   //   target: 'https://hp-gsbstaging.docebosaas.com',//'https://daily.gsbprint.net',
+   //   changeOrigin: true,
+   //   //secure: true,
+   //   logLevel: "debug"
+   // },
+   // {
+   //   context: '/api//DeviceFamilyModelSkills',
+   //   target: 'http://localhost:54947',//'https://daily.gsbprint.net',
+   //   changeOrigin: true,
+   //   //secure: true,
+   //   logLevel: "debug"
+   // },
+   {
+     context: '/api/learn',
+     target: 'http://localhost:54947/',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     timeout: 720000
+   },
+   {
+     context: '/api/portal',
+     target: 'https://stg.printopt.org',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   },
+   {
+     context: '/oauth2/token',
+     target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   },
+   {
+     context: '/manage/v1/user',
+     target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   },
+   {
+     context: '/learn/v1/enrollments',
+     target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug",
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   },
+   {
+     context: '/learn/v1/lp/',
+     target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+     changeOrigin: true,
+     //secure: true,
+     logLevel: "debug"  ,
+     agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+    },{
+      context: '/audiences/v1/audience/',
+     target: 'https://hp-gsbstaging.docebosaas.com/',//'https://daily.gsbprint.net',
+      changeOrigin: true,
+   //   //secure: true,
+      logLevel: "debug",
+      agent: new HttpsProxyAgent('http://web-proxy.austin.hpicorp.net:8080')
+   }
+ ];
+  
+  
+  
+ function setupForCorporateProxy(proxyConfig) {
+   if (!Array.isArray(proxyConfig)) {
+     proxyConfig = [proxyConfig];
+   }
+  
+  
+  
+   const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+   let agent = null;
+  
+  
+  
+   if (proxyServer) {
+     agent = new HttpsProxyAgent(proxyServer);
+     proxyConfig.forEach(entry => { entry.agent = agent; });
+   }
+  
+  
+  
+   return proxyConfig;
+ }
+  
+  
+  
+ module.exports = setupForCorporateProxy(proxyConfig);
+
+</pre>
+<pre id="environment" style="display:none;">
+    // This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+ 
+export const environment = {
+  printOS_URL: 'https://stg.printopt.org/',
+  docebo_URL: 'https://hp-gsbstaging.docebosaas.com/',
+  learn_URL: 'http://172.21.253.235:8070/Learn_APIStg/',
+  Docebo_Image_URL: 'https://d36spl5w3z9i0o.cloudfront.net/files/h/p/hp_gsbstaging_docebosaas_com/assets/courselogo/original/', //LP image url CDN Path
+  Docebo_thumb_URL: 'https://d36spl5w3z9i0o.cloudfront.net/files/assets/courselogo/original/',
+  production: true,
+  doceboGroupId: 'cabe8064-032f-8f',//112978, // this Docebo group for daily environment learn app users group name is : Learnapp_Test
+  version: '0.0.0',
+  environmentMode: 'staging',
+  all_HP_Customers: 420,
+  all_HP_Employees_Staff: 421,
+  HP_ProfileUrl:"https://myaccount.stg.cd.id.hp.com/profile",
+  Courselink:"https://learn.stg.printopt.org/#/Learn/Courses/:all",
+  LPlink:"https://learn.stg.printopt.org/#/Learn/ApplicationDetails/",
+  HP_Setings:"https://stg.printopt.org/home/#/settings",
+  Channel_MKALink:"https://myknowledge.stg.printopt.org/",
+  LP_Course_ShareLink:"https://learn.stg.printopt.org/#/Learn/CoursesAndLearningPlans/:d"
+ 
+};
+ 
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+ 
+ 
+</pre>
+<br>
+<button style="background-color:rgb(0, 255, 242) ; " onclick="copyconfig()">Copy Config.js Text</button>
+<br>
+<br>
+<button style="background-color:rgb(0, 255, 153) ; " onclick="copyenv()">Copy Environment Text</button>
+
+<br><br>
+<div id="alert" style="background-color:rgb(0, 255, 0); font-weight:300;display:none;" >text copied</div>
+<script>
+function copyconfig() {
+  // Get the text from the div using its ID
+  var text = document.getElementById("config").innerText;
+  
+  // Copy the text to the clipboard
+  navigator.clipboard.writeText(text);
+}
+function copyconfigdaily(){
+    var text = document.getElementById("configdaily").innerText;
+  
+  // Copy the text to the clipboard
+  navigator.clipboard.writeText(text);
+  var successMessage = document.getElementById('alert');
+    successMessage.textContent = "Text copied!.... ";
+    document.body.appendChild(successMessage);
+    setTimeout(function() {
+      successMessage.remove();
+    }, 2000);
+}
+function copyenv() {
+  // Get the text from the div using its ID
+  var text = document.getElementById("environment").innerText;
+  
+  // Copy the text to the clipboard
+  navigator.clipboard.writeText(text);
+  var successMessage = document.getElementById('alert');
+    successMessage.style.display="block";
+    document.body.appendChild(successMessage);
+    setTimeout(function() {
+      successMessage.style.display="none";
+    }, 2000);
+}
+</script>
